@@ -187,12 +187,31 @@ rm -rf $HOME/.lava/data
 curl https://files.itrocket.net/testnet/lava/snap_lava.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
 mv $HOME/.lava/priv_validator_state.json.backup $HOME/.lava/data/priv_validator_state.json
 ```
-## 18) Snapshot indiriyoruz.
+## 18) Node tekrar başlatıyoruz.
+  
+```
+sudo systemctl restart lavad && sudo journalctl -u lavad -f
+```
+# 82705. bloktan sonra güncelleme yapılması gerekiyor. Onu yapıyoruz.
+  
+## 19) Node tekrar başlatıyoruz.
   
 ```
 sudo systemctl stop lavad
-cp $HOME/.lava/data/priv_validator_state.json $HOME/.lava/priv_validator_state.json.backup
-rm -rf $HOME/.lava/data
-curl https://files.itrocket.net/testnet/lava/snap_lava.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
-mv $HOME/.lava/priv_validator_state.json.backup $HOME/.lava/data/priv_validator_state.json
+
+cd $HOME
+rm -rf $HOME/lava
+git clone https://github.com/lavanet/lava.git
+cd lava
+git checkout v0.6.0-RC3
+make install
+
+sudo systemctl start lavad
+sudo journalctl -u lavad -f --no-hostname -o cat
+``` 
+### Bu işlemler sonrasında Ctrl +C ile devam ediyoruz. Sonrasında node sekronize olması gerekiyor. aşağıdaki kodu girdiğinizde
 ```
+lavad status 2>&1 | jq .SyncInfo
+``` 
+![false](https://user-images.githubusercontent.com/111747226/220988248-52e8d197-2894-4cb2-bf98-f22a9fd1e3bb.png)
+Bu şekilde false alıyorsanız. İşlem tamamdır. True olarak geliyorsa senkronize olmamaış demektir. Validator kurulabilmek için senkronize olması gerekiyor. 
