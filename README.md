@@ -224,10 +224,17 @@ Bu şekilde false alıyorsanız. İşlem tamamdır. True olarak geliyorsa senkro
 ```
 lavad keys add cüzdanadi
 ```
-> bu komut sonrasında aşağıdakine benzer bir çıktı alıyoruz.
+> bu komut sonrasında aşağıdakine benzer bir çıktı alıyoruz. Çıktıda siyah olarak karaladığım alan gizli anahtar kelimeler, onları bir yere kayıt etmeyi unutmayın.
 ![cuzdan](https://user-images.githubusercontent.com/111747226/220991001-b7e24e96-4728-4ad2-9e59-f91a7150064f.png)
   
 lava@15tmnshwnsu5r4j9376dhydrukpf6avatlqgy9e buna benzer bir cüzdan adresiniz oluyor. şimdi faucetten token istiyoruz.
+
+### <a href="https://discord.gg/lavanetxyz" target="_blank" rel="Lava Network" >Buradan</a> discorda kanallarına katılıyoruz. Faucet kanalına gidiyoruz.
+  ```
+$request cüzdanadresi
+```
+
+
 
  
 
