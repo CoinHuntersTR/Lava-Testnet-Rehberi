@@ -39,7 +39,8 @@ sudo tar -C /usr/local -xzf $go_package_file_name
 ```
 echo "export PATH=\$PATH:/usr/local/go/bin" >>~/.profile
 ```
-```source ~/.profile
+```
+ source ~/.profile
 ```
 
 ## 3) Node Kurulumuna Geçiyoruz.
