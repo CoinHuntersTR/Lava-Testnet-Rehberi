@@ -209,7 +209,8 @@ make install
 sudo systemctl start lavad
 sudo journalctl -u lavad -f --no-hostname -o cat
 ``` 
-### Bu işlemler sonrasında Ctrl +C ile devam ediyoruz. Sonrasında node sekronize olması gerekiyor. aşağıdaki kodu girdiğinizde
+## Node Durumu Görüntüleme
+>  Bu işlemler sonrasında Ctrl +C ile devam ediyoruz. Sonrasında node sekronize olması gerekiyor. aşağıdaki kodu girdiğinizde
 ```
 lavad status 2>&1 | jq .SyncInfo
 ``` 
@@ -233,7 +234,28 @@ lava@15tmnshwnsu5r4j9376dhydrukpf6avatlqgy9e buna benzer bir cüzdan adresiniz o
   ```
 $request cüzdanadresi
 ```
-
+## 2) Validator Oluşturma
+>   cüzdanadi yerine kendi cüzdanadınızı yazın. komutu yazdıktan sonra, gelen soruya y ENTER diyoruz.
+```
+lavad tx staking create-validator \
+  --amount 9000ulava \
+  --from cüzdanadadi \
+  --commission-max-change-rate "0.01" \
+  --commission-max-rate "0.2" \
+  --commission-rate "0.05" \
+  --min-self-delegation "1" \
+  --pubkey  $(lavad tendermint show-validator) \
+  --moniker $MONIKER \
+  --chain-id $LAVA_CHAIN_ID
+```
+## 2) Validator takibi
+  > Validator oluştruduktan sonra size bir TXH verecek bunu;
+  
+  <a href="https://lava.explorers.guru/" target="_blank" rel="Lava Network" >Lava Explorer</a> adresine gidiyoruz. Terminalde verilen txh aratıyoruz. "Success" çıktısı aldıysanız node kurulmuş demektir. 
+ 
+  ![explorer](https://user-images.githubusercontent.com/111747226/220993747-0c66945f-5fb8-4db3-9e12-d37904405d7d.png)
+  
+  Belirlediğiniz Moniker adınız ile ararsannız bu şekilde bir sayfadan node durumunu kontrol edebilirsiniz.
 
 
  
