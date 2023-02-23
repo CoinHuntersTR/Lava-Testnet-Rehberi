@@ -221,7 +221,7 @@ $request cüzdanadresi
 ```
 lavad tx staking create-validator \
   --amount 9000ulava \
-  --from cüzdanadadi \
+  --from cüzdanadi \
   --commission-max-change-rate "0.01" \
   --commission-max-rate "0.2" \
   --commission-rate "0.05" \
@@ -293,11 +293,11 @@ lavad keys add cüzdanadi --recover
 ```
 ### Cüzdan Silme
 ```
-lavad keys delete $WALLET
+lavad keys delete cüzdanadi
 ```
 ### Cüzdan Silme
 ```
-lavad keys delete $WALLET
+lavad keys delete cüzdanadi
 ```
 ## Node Bilgilerine erişim
   
@@ -324,12 +324,12 @@ lavad tx distribution withdraw-all-rewards --from cüzdanadi --chain-id $LAVA_CH
 ### Komisyon ödüllerini çekme
 
 ```
-lavad tx distribution withdraw-rewards $VALOPER_ADDRESS --from $WALLET --commission --chain-id $LAVA_CHAIN_ID --gas auto --gas-adjustment 1.3
+lavad tx distribution withdraw-rewards validatoradresi --from cüzdanadi --commission --chain-id $LAVA_CHAIN_ID --gas auto --gas-adjustment 1.3
 ```
 ### Delegate etme
 
 ```
-lavad tx staking delegate $VALOPER_ADDRESS 1000000ulava --from $WALLET --chain-id $LAVA_CHAIN_ID --gas=auto --gas-adjustment 1.3
+lavad tx staking delegate validatoradresi 1000000ulava --from cüzdanadi --chain-id $LAVA_CHAIN_ID --gas=auto --gas-adjustment 1.3
 ```
 ### Başka Validatordan Redelegate etme
 
