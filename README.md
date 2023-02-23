@@ -317,6 +317,42 @@ lavad keys delete $WALLET
 ```
 lavad keys delete $WALLET
 ```
+## Node Bilgilerine erişim
+  
+### Node senkronizasyon
 
+```
+lavad status 2>&1 | jq .SyncInfo
+```
+### Node durumu
+
+```
+curl -s localhost:${LAVA_PORT}657/status
+```
+### Oylamaya Katılma
+
+```
+lavad tx gov vote (oylama numarası) yes --from cüzdanadi --chain-id $LAVA_CHAIN_ID
+```
+### Ödülleri cüzdana çekme
+
+```
+lavad tx distribution withdraw-all-rewards --from cüzdanadi --chain-id $LAVA_CHAIN_ID --gas auto --gas-adjustment 1.3
+```
+### Komisyon ödüllerini çekme
+
+```
+lavad tx distribution withdraw-rewards $VALOPER_ADDRESS --from $WALLET --commission --chain-id $LAVA_CHAIN_ID --gas auto --gas-adjustment 1.3
+```
+### Delegate etme
+
+```
+lavad tx staking delegate $VALOPER_ADDRESS 1000000ulava --from $WALLET --chain-id $LAVA_CHAIN_ID --gas=auto --gas-adjustment 1.3
+```
+### Başka Validatordan Redelegate etme
+
+```
+lavad tx staking redelegate kendivalidatoradresin karsivalidatoradresi 1000000ulava --from $WALLET --chain-id $LAVA_CHAIN_ID --gas auto --gas-adjustment 1.3
+```
 
 
