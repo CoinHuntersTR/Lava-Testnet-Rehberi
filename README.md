@@ -256,9 +256,67 @@ lavad tx staking create-validator \
   ![explorer](https://user-images.githubusercontent.com/111747226/220993747-0c66945f-5fb8-4db3-9e12-d37904405d7d.png)
   
   Belirlediğiniz Moniker adınız ile ararsannız bu şekilde bir sayfadan node durumunu kontrol edebilirsiniz.
+  
+# Yararlı Komutlar
+  
+## Servis Komutları
+  
+### Log kontrolü
 
+```
+sudo journalctl -u lavad -f
+```
+### Node Durdurma
 
- 
+```
+sudo systemctl stop lavad
+```
+### Node Restart etme
+
+```
+sudo systemctl restart lavad
+```
+### Node Restart etme
+
+```
+sudo systemctl restart lavad
+```
+
+## Cüzdan Komutları
+  
+### Cüzdan bakiye kontrolü
+
+```
+lavad query bank balances cüzdanadresi
+```
+### Cüzdan token transferi
+
+```
+lavad tx bank send kendicüzdanadresin gidecekcüzdanadresi 1000000ulava --gas auto --gas-adjustment 1.3
+```
+### Cüzdan listeleme
+
+```
+lavad keys list
+```
+### Yeni cüzdan oluşturma
+
+```
+lavad keys add cüzdanadı
+```
+### Var olan cüzdanı yeniden yükleme
+
+```
+lavad keys add cüzdanadi --recover
+```
+### Cüzdan Silme
+```
+lavad keys delete $WALLET
+```
+### Cüzdan Silme
+```
+lavad keys delete $WALLET
+```
 
 
 
