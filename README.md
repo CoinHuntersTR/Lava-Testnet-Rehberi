@@ -42,7 +42,35 @@ echo "export PATH=\$PATH:/usr/local/go/bin" >>~/.profile
 ```source ~/.profile
 ```
 
+## 3) Node Kurulumuna Geçiyoruz.
 
+```
+git clone https://github.com/lavanet/lava-config.git
+```
+```
+cd lava-config/testnet-1
+```
+```
+source setup_config/setup_config.sh
+```
 
+## 3) Node yapılandırmalarına devam ediyoruz.
+  
+```
+echo "Lava config file path: $lava_config_folder"
+```
+```
+mkdir -p $lavad_home_folder
+```
+```
+mkdir -p $lava_config_folder
+``` 
+```
+cp default_lavad_config_files/* $lava_config_folder
+``` 
 
-
+## 4) Genesis dosyasını indiriyoruz.
+  
+```
+cp genesis_json/genesis.json $lava_config_folder/genesis.json
+```
