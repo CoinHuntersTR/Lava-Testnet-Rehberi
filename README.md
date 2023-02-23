@@ -20,7 +20,7 @@ sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc -y
 ```
 
 ## 2) Moniker adımızı ve diğer ayarlarımızı yapıyoruz.
-> <YOUR_MONIKER> yerine istediğiniz bir ad yazabilirsiniz <> dahil sili yazıyoruz.
+> <YOUR_MONIKER> yerine istediğiniz bir adı yazabilirsiniz <> dahil sili yazıyoruz.
 ```
 LAVA_PORT=20
 echo "export WALLET="wallet"" >> $HOME/.bash_profile
@@ -88,7 +88,7 @@ s%^address = \"0.0.0.0:9091\"%address = \"0.0.0.0:${LAVA_PORT}091\"%;
 s%^address = \"0.0.0.0:8545\"%address = \"0.0.0.0:${LAVA_PORT}545\"%; 
 s%^ws-address = \"0.0.0.0:8546\"%ws-address = \"0.0.0.0:${LAVA_PORT}546\"%" $HOME/.lava/config/app.toml
 ```
-## 9) config.tom dosyasını ayarlıyoruz.
+## 9) config.toml dosyasını ayarlıyoruz.
   
 ```
 sed -i.bak -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:${LAVA_PORT}658\"%; 
@@ -98,17 +98,7 @@ s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${LAVA_PORT}656\"%;
 s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${LAVA_PORT}656\"%;
 s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${LAVA_PORT}660\"%" $HOME/.lava/config/config.toml
 ```
-## 10) config.toml dosyasını ayarlıyoruz.
-  
-```
-sed -i.bak -e "s%^proxy_app = \"tcp://127.0.0.1:26658\"%proxy_app = \"tcp://127.0.0.1:${LAVA_PORT}658\"%; 
-s%^laddr = \"tcp://127.0.0.1:26657\"%laddr = \"tcp://0.0.0.0:${LAVA_PORT}657\"%; 
-s%^pprof_laddr = \"localhost:6060\"%pprof_laddr = \"localhost:${LAVA_PORT}060\"%;
-s%^laddr = \"tcp://0.0.0.0:26656\"%laddr = \"tcp://0.0.0.0:${LAVA_PORT}656\"%;
-s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${LAVA_PORT}656\"%;
-s%^prometheus_listen_addr = \":26660\"%prometheus_listen_addr = \":${LAVA_PORT}660\"%" $HOME/.lava/config/config.toml
-```
-## 11) Config yapılandırmasına devam ediyoruz.
+## 10) Config yapılandırmasına devam ediyoruz.
   
 ```
 sed -i -e "s/^pruning *=.*/pruning = \"nothing\"/" $HOME/.lava/config/app.toml
@@ -116,14 +106,14 @@ sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.la
 sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"50\"/" $HOME/.lava/config/app.toml
 ```
 
-## 12) Gas ödemesini yeniden ayarlıyoruz.
+## 11) Gas ödemesini yeniden ayarlıyoruz.
   
 ```
 sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.0ulava"/g' $HOME/.lava/config/app.toml
 sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.lava/config/config.toml
 sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.lava/config/config.toml
 ```
-## 13) Parametreleri güncelliyoruz.
+## 12) Parametreleri güncelliyoruz.
   
 ```
 sed -i 's/create_empty_blocks = .*/create_empty_blocks = true/g' ~/.lava/config/config.toml
@@ -132,21 +122,13 @@ sed -i 's/timeout_propose = ".*s"/timeout_propose = "60s"/g' ~/.lava/config/conf
 sed -i 's/timeout_commit = ".*s"/timeout_commit = "60s"/g' ~/.lava/config/config.toml
 sed -i 's/timeout_broadcast_tx_commit = ".*s"/timeout_broadcast_tx_commit = "601s"/g' ~/.lava/config/config.toml
 ```
-## 14) Parametreleri güncelliyoruz.
-  
-```
-sed -i 's/create_empty_blocks = .*/create_empty_blocks = true/g' ~/.lava/config/config.toml
-sed -i 's/create_empty_blocks_interval = ".*s"/create_empty_blocks_interval = "60s"/g' ~/.lava/config/config.toml
-sed -i 's/timeout_propose = ".*s"/timeout_propose = "60s"/g' ~/.lava/config/config.toml
-sed -i 's/timeout_commit = ".*s"/timeout_commit = "60s"/g' ~/.lava/config/config.toml
-sed -i 's/timeout_broadcast_tx_commit = ".*s"/timeout_broadcast_tx_commit = "601s"/g' ~/.lava/config/config.toml
-```
-## 15) Chain verilerini sıfırlıyoruz.
+
+## 13) Chain verilerini sıfırlıyoruz.
   
 ```
 lavad tendermint unsafe-reset-all --home $HOME/.lava
 ```
-## 16) Servis doysasını oluşturuyoruz.
+## 14) Servis doysasını oluşturuyoruz.
   
 ```
 sudo tee /etc/systemd/system/lavad.service > /dev/null <<EOF
@@ -165,7 +147,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 ```
-## 17) Node etkinleştirip çalıştırıyoruz.
+## 15) Node etkinleştirip çalıştırıyoruz.
   
 ```
 sudo systemctl daemon-reload
@@ -178,7 +160,7 @@ sudo systemctl enable lavad
 ```
 > Burada ağ başladıktan sonra exit code hatası veya bağlanma hatası alıyorsanız. Aşağıdan devam edebilirsiniz. Ctrl+C ile durdurup devam ediyoruz.
 
-## 18) Snapshot indiriyoruz.
+## 16) Snapshot indiriyoruz.
   
 ```
 sudo systemctl stop lavad
@@ -187,14 +169,14 @@ rm -rf $HOME/.lava/data
 curl https://files.itrocket.net/testnet/lava/snap_lava.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
 mv $HOME/.lava/priv_validator_state.json.backup $HOME/.lava/data/priv_validator_state.json
 ```
-## 18) Node tekrar başlatıyoruz.
+## 17) Node tekrar başlatıyoruz.
   
 ```
 sudo systemctl restart lavad && sudo journalctl -u lavad -f
 ```
 # 82570. bloktan sonra güncelleme yapılması gerekiyor. Onu yapıyoruz.
   
-## 20) Node tekrar başlatıyoruz.
+## 18) Node tekrar başlatıyoruz.
   
 ```
 sudo systemctl stop lavad
