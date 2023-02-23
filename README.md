@@ -192,9 +192,9 @@ mv $HOME/.lava/priv_validator_state.json.backup $HOME/.lava/data/priv_validator_
 ```
 sudo systemctl restart lavad && sudo journalctl -u lavad -f
 ```
-# 82705. bloktan sonra güncelleme yapılması gerekiyor. Onu yapıyoruz.
+# 82570. bloktan sonra güncelleme yapılması gerekiyor. Onu yapıyoruz.
   
-## 19) Node tekrar başlatıyoruz.
+## 20) Node tekrar başlatıyoruz.
   
 ```
 sudo systemctl stop lavad
@@ -217,3 +217,19 @@ lavad status 2>&1 | jq .SyncInfo
   
  
 Bu şekilde false alıyorsanız. İşlem tamamdır. True olarak geliyorsa senkronize olmamaış demektir. Validator kurulabilmek için senkronize olması gerekiyor. 
+
+# Validator Kurulumu
+## 1) Cüzdan oluşturma
+>   cüzdanadi yerine istediğiniz bir ismi yazabilirsiniz.
+```
+lavad keys add cüzdanadi
+```
+> bu komut sonrasında aşağıdakine benzer bir çıktı alıyoruz.
+![cuzdan](https://user-images.githubusercontent.com/111747226/220991001-b7e24e96-4728-4ad2-9e59-f91a7150064f.png)
+  
+lava@15tmnshwnsu5r4j9376dhydrukpf6avatlqgy9e buna benzer bir cüzdan adresiniz oluyor. şimdi faucetten token istiyoruz.
+
+ 
+
+
+
