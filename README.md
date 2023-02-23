@@ -141,3 +141,58 @@ sed -i 's/timeout_propose = ".*s"/timeout_propose = "60s"/g' ~/.lava/config/conf
 sed -i 's/timeout_commit = ".*s"/timeout_commit = "60s"/g' ~/.lava/config/config.toml
 sed -i 's/timeout_broadcast_tx_commit = ".*s"/timeout_broadcast_tx_commit = "601s"/g' ~/.lava/config/config.toml
 ```
+## 15) Chain verilerini sıfırlıyoruz.
+  
+```
+lavad tendermint unsafe-reset-all --home $HOME/.lava
+```
+## 16) Servis doysasını oluşturuyoruz.
+  
+```
+sudo tee /etc/systemd/system/lavad.service > /dev/null <<EOF
+[Unit]
+Description=lava
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$(which lavad) start --home $HOME/.lava
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+## 17) Node etkinleştirip çalıştırıyoruz.
+  
+```
+sudo systemctl daemon-reload
+```
+```
+sudo systemctl enable lavad
+```
+```
+ sudo systemctl restart lavad && sudo journalctl -u lavad -f
+```
+> Burada ağ başladıktan sonra exit code hatası veya bağlanma hatası alıyorsanız. Aşağıdan devam edebilirsiniz. Ctrl+C ile durdurup devam ediyoruz.
+
+## 18) Snapshot indiriyoruz.
+  
+```
+sudo systemctl stop lavad
+cp $HOME/.lava/data/priv_validator_state.json $HOME/.lava/priv_validator_state.json.backup
+rm -rf $HOME/.lava/data
+curl https://files.itrocket.net/testnet/lava/snap_lava.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
+mv $HOME/.lava/priv_validator_state.json.backup $HOME/.lava/data/priv_validator_state.json
+```
+## 18) Snapshot indiriyoruz.
+  
+```
+sudo systemctl stop lavad
+cp $HOME/.lava/data/priv_validator_state.json $HOME/.lava/priv_validator_state.json.backup
+rm -rf $HOME/.lava/data
+curl https://files.itrocket.net/testnet/lava/snap_lava.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
+mv $HOME/.lava/priv_validator_state.json.backup $HOME/.lava/data/priv_validator_state.json
+```
