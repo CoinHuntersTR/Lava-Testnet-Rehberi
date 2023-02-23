@@ -92,3 +92,31 @@ unzip cosmovisor-upgrades.zip
 ```
 cp -r cosmovisor-upgrades/* $lavad_home_folder/cosmovisor
 ```
+> Ortam değişkenlerini güncelliyoruz.
+```
+echo "# Setup Cosmovisor" >> ~/.profile
+echo "export DAEMON_NAME=lavad" >> ~/.profile
+echo "export CHAIN_ID=lava-testnet-1" >> ~/.profile
+echo "export DAEMON_HOME=$HOME/.lava" >> ~/.profile
+echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=true" >> ~/.profile
+echo "export DAEMON_LOG_BUFFER_SIZE=512" >> ~/.profile
+echo "export DAEMON_RESTART_AFTER_UPGRADE=true" >> ~/.profile
+echo "export UNSAFE_SKIP_BACKUP=true" >> ~/.profile
+source ~/.profile
+```  
+> Ağı Başlatıyoruz.
+```
+$lavad_home_folder/cosmovisor/genesis/bin/lavad init \
+my-node \
+--chain-id lava-testnet-1 \
+--home $lavad_home_folder \
+--overwrite
+cp genesis_json/genesis.json $lava_config_folder/genesis.json
+```
+>  cosmovisor'ın bir hata atacağını unutmayın ⚠️  Bu şekilde bir hata ; /home/ubuntu/.lava/cosmovisor/current/upgrade-info.json: böyle bir dosya veya dizin yok, Sorun yok devam ediyoruz.
+  
+## Versiyonu kontrol edelim.
+```
+cosmovisor version
+```
+
