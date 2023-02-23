@@ -214,4 +214,6 @@ sudo journalctl -u lavad -f --no-hostname -o cat
 lavad status 2>&1 | jq .SyncInfo
 ``` 
 ![false](https://user-images.githubusercontent.com/111747226/220988248-52e8d197-2894-4cb2-bf98-f22a9fd1e3bb.png)
+  
+ 
 Bu şekilde false alıyorsanız. İşlem tamamdır. True olarak geliyorsa senkronize olmamaış demektir. Validator kurulabilmek için senkronize olması gerekiyor. 
