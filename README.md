@@ -54,7 +54,7 @@ cd lava-config/testnet-1
 source setup_config/setup_config.sh
 ```
 
-## 3) Node yapılandırmalarına devam ediyoruz.
+## 4) Node yapılandırmalarına devam ediyoruz.
   
 ```
 echo "Lava config file path: $lava_config_folder"
@@ -69,8 +69,26 @@ mkdir -p $lava_config_folder
 cp default_lavad_config_files/* $lava_config_folder
 ``` 
 
-## 4) Genesis dosyasını indiriyoruz.
+## 5) Genesis dosyasını indiriyoruz.
   
 ```
 cp genesis_json/genesis.json $lava_config_folder/genesis.json
+```
+# Cosmovisor Kurulumu
+  
+> Gelecekteki yükseltmelerin kusursuz bir şekilde gerçekleşmesini sağlamak için cosmovisoru kuruyoruz.
+```
+go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
+```
+```
+mkdir -p $lavad_home_folder/cosmovisor
+```
+```
+wget https://lava-binary-upgrades.s3.amazonaws.com/testnet/cosmovisor-upgrades/cosmovisor-upgrades.zip
+```
+```
+unzip cosmovisor-upgrades.zip
+```
+```
+cp -r cosmovisor-upgrades/* $lavad_home_folder/cosmovisor
 ```
