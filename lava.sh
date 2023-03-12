@@ -11,7 +11,7 @@ ENDCOLOR="\e[0m"
 function NodePreInstall () {
 
   echo "---------------------------------------------------"
-  echo -e "${GREEN}Düğüm kurulumu"${ENDCOLOR} && sleep 2
+  echo -e "${GREEN}Validator kurulumu"${ENDCOLOR} && sleep 2
 
   cd $HOME
   wget -qO $HOME/lavad https://github.com/lavanet/lava/releases/download/v0.7.0/lavad-v0.7.0-RC1-linux-amd64
@@ -99,7 +99,7 @@ function NodeChangePorts () {
   echo "---------------------------------------------------"
   echo -e "${GREEN}Port değiştirmek gerekli mi? İstediğiniz eylemi seçin ve tıklayın Enter${ENDCOLOR}" && sleep 3
   echo -e ""
-  echo "1 Evet, varsayılan düğüm bağlantı noktalarını değiştir (Daha - https://wenmoney.io/cheat-sheet-cosmos-nodes#Ozd0)"
+  echo "1 Evet, varsayılan validator bağlantı noktalarını değiştir (Daha - https://wenmoney.io/cheat-sheet-cosmos-nodes#Ozd0)"
   echo "2 HAYIR, varsayılan bağlantı noktalarını bırak"
 
   read ports
@@ -110,14 +110,14 @@ function NodeChangePorts () {
       source $HOME/.bash_profile
 
       if [ ! $LAVA_gRPC ]; then
-        read -p "Введите порт gRPC : " LAVA_gRPC
+        read -p "gRPC bağlantı noktasını girin : " LAVA_gRPC
         echo 'export LAVA_gRPC='\"${LAVA_gRPC}\" >> $HOME/.bash_profile
       else
-        echo -e "Порт LAVA_gRPC уже установлен в системе"
+        echo -e "LAVA_gRPC bağlantı noktası sistemde zaten yüklü"
       fi
 
       if [ ! $LAVA_gRPCweb ]; then
-        read -p "Введите порт gRPC(web): " LAVA_gRPCweb
+        read -p "gRPC(web) bağlantı noktasını girin: " LAVA_gRPCweb
         echo 'export LAVA_gRPCweb='\"${LAVA_gRPCweb}\" >> $HOME/.bash_profile
       else
         echo -e "LAVA_gRPCweb bağlantı noktası sistemde zaten yüklü"
@@ -131,7 +131,7 @@ function NodeChangePorts () {
       fi
 
       if [ ! $LAVA_laddrrpc ]; then
-        read -p "Введите порт laddr(rpc): " LAVA_laddrrpc
+        read -p "Laddr(rpc) bağlantı noktasını girin: " LAVA_laddrrpc
         echo 'export LAVA_laddrrpc='\"${LAVA_laddrrpc}\" >> $HOME/.bash_profile
       else
         echo -e "LAVA_laddrrpc bağlantı noktası sistemde zaten yüklü"
@@ -300,7 +300,7 @@ echo "---------------------------------------------------"
 echo -e "${GREEN}Başlatma ${ENDCOLOR}" && sleep 2
 
 sudo apt install curl -y
-curl -s https://nodes.wenmoney.io/wenlogo.sh | bash
+curl -s https://raw.githubusercontent.com/CoinHuntersTR/Andromeda-Testnet-Rehberi/main/logo.sh | bash
 
 echo "---------------------------------------------------"
 echo -e "${GREEN}Bir eylem seçin. İstenilen numarayı girin ve tuşu ile işlemi onaylayın. Enter${ENDCOLOR}" && sleep 3
