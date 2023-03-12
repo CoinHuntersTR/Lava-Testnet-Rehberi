@@ -244,7 +244,7 @@ function NodeWalletSetup {
 
   if [ ! $LAVA_ADDRESS ]; then
     echo "---------------------------------------------------"
-    echo -e "${GREEN}ADRES ve VALOPER ekleme (будет двойной запрос пароля)${ENDCOLOR}" && sleep 2
+    echo -e "${GREEN}ADRES ve VALOPER ekleme (çift ​​şifre istemi olacak)${ENDCOLOR}" && sleep 2
 
     source $HOME/.bash_profile
     LAVA_ADDRESS=$(lavad keys show $LAVA_WALLET -a --keyring-backend os)
@@ -305,7 +305,7 @@ curl -s https://nodes.wenmoney.io/wenlogo.sh | bash
 echo "---------------------------------------------------"
 echo -e "${GREEN}Bir eylem seçin. İstenilen numarayı girin ve tuşu ile işlemi onaylayın. Enter${ENDCOLOR}" && sleep 3
 echo -e ""
-echo "1 Düğümü sıfırdan kurun (lava-testnet-1) - встроен снапшот, доступна смена портов"
+echo "1 Düğümü sıfırdan kurun (lava-testnet-1) - yerleşik anlık görüntü, bağlantı noktası değişikliği mevcut"
 echo "2 102.800 bloğunda 0.7.0 sürümüne güncelleme"
 echo "3 Parametre ayarı"
 echo "4 Belleği temizleyin ve anlık görüntüden yükleyin (doğrulayıcı ve cüzdan verilerine dokunulmaz)"
